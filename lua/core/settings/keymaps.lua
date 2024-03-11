@@ -1,8 +1,8 @@
 #! /usr/bin/env lua
 
-local o   = { noremap = true, silent = true }
-local co  = { noremap = true }
-local to  = { silent = true }
+local o = { noremap = true, silent = true }
+local co = { noremap = true }
+local to = { silent = true }
 
 -- Shorten function name
 local key = vim.keymap.set
@@ -43,6 +43,9 @@ end, o)
 
 -- Create a new tab
 key('n', '<C-w>t', '<Cmd>tabnew<Cr>', o)
+
+-- Select paste text
+key('n', 'gV', '`[v`]', o)
 
 -- Insert --
 -- Some emacs keyblindings moves

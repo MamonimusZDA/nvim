@@ -87,4 +87,17 @@ return {
     -- https://github.com/cvigilv/esqueleto.nvim
     opts = {},
   },
+  {
+    'danymat/neogen',
+    version = '*',
+    config = true,
+    keys = {
+      {
+        '<leader>ng',
+        function()
+          require('neogen').generate({})
+        end,
+      },
+    },
+  },
 }

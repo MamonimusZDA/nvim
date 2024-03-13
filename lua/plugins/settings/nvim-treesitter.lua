@@ -5,12 +5,10 @@ if not status_ok then
   return
 end
 
----@diagnostic disable-next-line: redefined-local
 local status_ok, ts_repeat_move = pcall(require, 'nvim-treesitter.textobjects.repeatable_move')
 if not status_ok then
   return
 end
-
 
 local M = {}
 
@@ -22,7 +20,7 @@ function M.setup()
       'markdown',
       'markdown_inline',
       'bash',
-      'python'
+      'python',
     },
 
     ignore_install = { '' },
@@ -40,7 +38,7 @@ function M.setup()
       enable = true,
       disable = {
         'yaml',
-        'python'
+        'python',
       },
     },
 

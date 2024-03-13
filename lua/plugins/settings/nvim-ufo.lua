@@ -1,5 +1,4 @@
 #! /usr/bin/env lua
----@diagnostic disable: undefined-global, unused-local, missing-fields
 
 local M = {}
 
@@ -46,7 +45,7 @@ function M.setup()
   require('ufo').setup({
     fold_virt_text_handler = handler,
     close_fold_kinds = {},
-    provider_selector = function(bufnr, filetype, buftype)
+    provider_selector = function(_, filetype, _)
       return ftMap[filetype]
     end,
 

@@ -1,5 +1,4 @@
 #! /usr/bin/env lua
----@diagnostic disable: redefined-local, missing-fields
 
 local M = {}
 
@@ -14,6 +13,11 @@ if not status_ok then
 end
 
 local status_ok, ultisnips_map = pcall(require, 'cmp_nvim_ultisnips.mappings')
+if not status_ok then
+  return
+end
+
+local status_ok, neogen = pcall(require, 'neogen')
 if not status_ok then
   return
 end
@@ -44,8 +48,7 @@ function M.setup()
       if vim.bo.buftype == 'prompt' then
         return vim.api.nvim_get_mode().mode == 'c'
       else
-        return not context.in_treesitter_capture('comment')
-          and not context.in_syntax_group('Comment')
+        return not context.in_treesitter_capture('comment') and not context.in_syntax_group('Comment')
       end
     end,
 
@@ -56,24 +59,26 @@ function M.setup()
     },
 
     mapping = {
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs( 4), { 'i', 'c' }),
+      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 
       ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-      ['<C-e>'] = cmp.mapping {
+      ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
-      },
+      }),
 
       ['<C-n>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item({
-            behavior = types.cmp.SelectBehavior.Select
+            behavior = types.cmp.SelectBehavior.Select,
           })
         elseif vim.fn['UltiSnips#CanJumpForwards']() == 1 then
           ultisnips_map.jump_forwards(fallback)
+        elseif neogen.jumpable() then
+          neogen.jump_next()
         elseif check_backspace() then
           backout.out()
         else
@@ -83,10 +88,12 @@ function M.setup()
       ['<C-p>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item({
-            behavior = types.cmp.SelectBehavior.Select
+            behavior = types.cmp.SelectBehavior.Select,
           })
         elseif vim.fn['UltiSnips#CanJumpBackwards']() == 1 then
           ultisnips_map.jump_backwards(fallback)
+        elseif neogen.jumpable(-1) then
+          neogen.jump_prev()
         else
           backout.back()
         end
@@ -113,7 +120,6 @@ function M.setup()
             ultisnips = 1,
           }
 
-          ---@diagnostic disable-next-line: assign-type-mismatch
           vim_item.dup = duplicates[entry.source.name] or 0
         end
 
@@ -214,7 +220,7 @@ function M.setup()
       { name = 'calc' },
       { name = 'treesitter' },
       { name = 'ultisnips' },
-      { name = 'nvim_lsp_signature_help' }
+      { name = 'nvim_lsp_signature_help' },
     },
 
     confirm_opts = {
@@ -256,14 +262,14 @@ function M.setup()
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' },
-    }
+    },
   })
 
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'cmdline' },
-    })
+    }),
   })
 end
 

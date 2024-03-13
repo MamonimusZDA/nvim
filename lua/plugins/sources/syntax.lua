@@ -15,32 +15,34 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    lazy = true
+    lazy = true,
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
     event = {
       'BufReadPre',
-      'BufNewFile'
+      'BufNewFile',
     },
     config = true,
     keys = {
       {
-        '<leader>cx', function()
+        '<leader>cx',
+        function()
           require('treesitter-context').go_to_context(vim.v.count1)
-        end
-      }
+        end,
+      },
     },
   },
   {
     'atusy/treemonkey.nvim',
     keys = {
       {
-        'm', function ()
-          ---@diagnostic disable-next-line: missing-fields
+        'm',
+        function()
           require('treemonkey').select({ ignore_injections = false })
-        end, mode = { 'x', 'o' }
-      }
+        end,
+        mode = { 'x', 'o' },
+      },
     },
   },
   {

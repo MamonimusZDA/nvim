@@ -9,7 +9,6 @@ local M = {}
 
 function M.setup()
   neorg.setup({
-    -- lazy_loading = true,
     load = {
       ['core.autocommands'] = {},
       ['core.clipboard.code-blocks'] = {},
@@ -24,9 +23,12 @@ function M.setup()
             },
             heading = {
               icons = {
-                '◉', '○',
-                '✸', '✿',
-                '❀', '◆',
+                '◉',
+                '○',
+                '✸',
+                '✿',
+                '❀',
+                '◆',
               },
             },
           },

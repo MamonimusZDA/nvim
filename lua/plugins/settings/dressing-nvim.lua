@@ -1,5 +1,4 @@
 #! /usr/bin/env lua
----@diagnostic disable: duplicate-set-field
 
 local M = {}
 
@@ -10,12 +9,12 @@ function M.init()
   end
 
   vim.ui.select = function(...)
-    lazy.load({ plugins = { "dressing.nvim" } })
+    lazy.load({ plugins = { 'dressing.nvim' } })
     return vim.ui.select(...)
   end
 
   vim.ui.input = function(...)
-    lazy.load({ plugins = { "dressing.nvim" } })
+    lazy.load({ plugins = { 'dressing.nvim' } })
     return vim.ui.input(...)
   end
 end

@@ -1,5 +1,4 @@
 #! /usr/bin/env lua
----@diagnostic disable: missing-fields
 
 local M = {}
 

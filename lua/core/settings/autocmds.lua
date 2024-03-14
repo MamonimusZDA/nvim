@@ -9,23 +9,25 @@ autocmd('TextYankPost', {
   group = 'Basic_settings',
   callback = function()
     vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '100' })
-  end
+  end,
 })
 
 autocmd('BufWritePre', {
   group = 'Basic_settings',
   pattern = '',
-  callback = function(ev)
+  callback = function()
     local save_cursor = vim.fn.getpos('.')
-    pcall(function() vim.cmd [[silent! %s/\s\+$//e]] end)
+    pcall(function()
+      vim.cmd([[silent! %s/\s\+$//e]])
+    end)
     vim.fn.setpos('.', save_cursor)
-  end
+  end,
 })
 
 autocmd('VimResized', {
   group = 'Basic_settings',
   pattern = '',
-  command = "silent! tabdo wincmd ="
+  command = 'silent! tabdo wincmd =',
 })
 
 augroup('FileType_settings', { clear = true })
@@ -33,28 +35,34 @@ augroup('FileType_settings', { clear = true })
 autocmd('FileType', {
   group = 'FileType_settings',
   pattern = 'qf',
-  command = "set nobuflisted"
+  command = 'set nobuflisted',
 })
 
 autocmd('Filetype', {
   group = 'FileType_settings',
   pattern = {
-    'qf', 'help', 'man',
-    'lspinfo', 'lsp-installer',
-    'DressingSelect', 'Jaq',
-    'floaterm', 'null-ls-info',
-    'tsplayground', 'startuptime'
+    'qf',
+    'help',
+    'man',
+    'lspinfo',
+    'lsp-installer',
+    'DressingSelect',
+    'Jaq',
+    'floaterm',
+    'null-ls-info',
+    'tsplayground',
+    'startuptime',
   },
   callback = function()
     local o = {
-      buffer  = 0,
-      silent  = true,
+      buffer = 0,
+      silent = true,
       noremap = true,
     }
     local key = vim.keymap.set
     key('n', 'q', '<C-w>c', o)
     vim.opt_local.buflisted = false
-  end
+  end,
 })
 
 autocmd('FileType', {
@@ -63,8 +71,8 @@ autocmd('FileType', {
   callback = function()
     vim.opt_local.include = [[\v<((do|load)file|require|reload)[^''"]*[''"]\zs[^''"]+]]
     vim.opt_local.includeexpr = "substitute(v:fname,'\\.','/','g')"
-    vim.opt_local.suffixesadd:prepend '.lua'
-    vim.opt_local.suffixesadd:prepend 'init.lua'
+    vim.opt_local.suffixesadd:prepend('.lua')
+    vim.opt_local.suffixesadd:prepend('init.lua')
 
     for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
       vim.opt_local.path:append(path .. '/lua')
@@ -77,7 +85,7 @@ augroup('Terminal_settings', { clear = true })
 autocmd('TermOpen', {
   group = 'Terminal_settings',
   pattern = '',
-  command = 'startinsert'
+  command = 'startinsert',
 })
 
 autocmd('TermEnter', {
@@ -86,7 +94,7 @@ autocmd('TermEnter', {
     vim.o.number = false
     vim.o.relativenumber = false
     vim.o.cursorline = false
-  end
+  end,
 })
 
 autocmd('TermLeave', {
@@ -95,11 +103,25 @@ autocmd('TermLeave', {
     vim.o.number = true
     vim.o.relativenumber = true
     vim.o.cursorline = true
-  end
+  end,
 })
 
 autocmd('BufLeave', {
   group = 'Terminal_settings',
   pattern = 'term://*',
-  command = 'stopinsert'
+  command = 'stopinsert',
+})
+
+augroup('User_events', { clear = true })
+
+autocmd({ 'BufReadPre', 'BufNewFile', 'BufWritePost' }, {
+  group = 'User_events',
+  callback = function(args)
+    local current_file = vim.api.nvim_buf_get_name(args.buf)
+
+    if not (current_file == '' or vim.api.nvim_get_option_value('buftype', { buf = args.buf }) == 'nofile') then
+      vim.api.nvim_exec_autocmds('User', { pattern = 'FileOpen' })
+      vim.api.nvim_exec_autocmds('CursorMoved', { modeline = false })
+    end
+  end,
 })

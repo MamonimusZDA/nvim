@@ -2,7 +2,9 @@
   "diagnostics": {
     "disable": [
       "undefined-global",
-      "redefined-local"
+      "redefined-local",
+      "param-type-mismatch",
+      "missing-fields"
     ]
   }
 }

@@ -8,12 +8,12 @@ return {
       {
         '<leader>gf',
         '<Cmd>Git fetch --all -p<Cr>',
-        desc = 'Git fetch'
+        desc = 'Git fetch',
       },
       {
         '<leader>gl',
         '<Cmd>Git pull<Cr>',
-        desc = 'Git pull'
+        desc = 'Git pull',
       },
     },
   },
@@ -23,7 +23,7 @@ return {
       'CmdlineEnter',
       'InsertEnter',
       'CursorHold',
-      'CursorMoved'
+      'CursorMoved',
     },
     opts = {
       max_file_length = 10000,
@@ -43,5 +43,5 @@ return {
         '<Cmd>Gitsigns next_hunk<Cr>',
       },
     },
-  }
+  },
 }

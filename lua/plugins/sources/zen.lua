@@ -5,14 +5,8 @@ return {
     'folke/zen-mode.nvim',
     dependencies = 'twilight.nvim',
     cmd = 'ZenMode',
-    keys = {
-      {
-        '<leader>zm',
-        '<Cmd>ZenMode<Cr>'
-      }
-    },
     main = 'plugins.settings.zen-mode-nvim',
-    config = true
+    config = true,
   },
   {
     'folke/twilight.nvim',
@@ -23,6 +17,6 @@ return {
       'TwilightDisable',
     },
     main = 'plugins.settings.twilight-nvim',
-    config = true
-  }
+    config = true,
+  },
 }

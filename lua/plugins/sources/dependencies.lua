@@ -16,7 +16,10 @@ return {
     lazy = true,
   },
   {
-    'giusgad/hologram.nvim' ,
+    'giusgad/hologram.nvim',
+    enabled = function()
+      return not (os.getenv('OS') == 'ANDROID')
+    end,
     lazy = true,
   },
   {

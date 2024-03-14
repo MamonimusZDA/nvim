@@ -3,6 +3,9 @@
 return {
   {
     'giusgad/pets.nvim',
+    enabled = function()
+      return not (os.getenv('OS') == 'ANDROID')
+    end,
     dependencies = {
       'MunifTanjim/nui.nvim',
       'giusgad/hologram.nvim',
@@ -21,6 +24,9 @@ return {
   },
   {
     'rktjmp/playtime.nvim',
+    enabled = function()
+      return not (os.getenv('OS') == 'ANDROID')
+    end,
     cmd = 'Playtime',
     config = true,
   },
@@ -31,6 +37,9 @@ return {
   },
   {
     'mistricky/codesnap.nvim',
+    enabled = function()
+      return not (os.getenv('OS') == 'ANDROID')
+    end,
     build = 'make',
     cmd = 'CodeSnapPreviewOn',
     main = 'plugins.settings.codesnap-nvim',

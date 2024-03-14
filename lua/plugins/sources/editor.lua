@@ -3,8 +3,8 @@
 return {
   {
     'hrsh7th/nvim-insx',
-    event  = 'InsertEnter',
-    main   = 'insx.preset.standard',
+    event = 'InsertEnter',
+    main = 'insx.preset.standard',
     config = true,
   },
   {
@@ -25,19 +25,19 @@ return {
   },
   {
     'AgusDOLARD/backout.nvim',
-    event  = 'InsertEnter',
+    event = 'InsertEnter',
     config = true,
   },
   {
     'kylechui/nvim-surround',
     version = '*',
-    config  = true,
-    keys    = { 'cs', 'ys', 'ds' },
+    config = true,
+    keys = { 'cs', 'ys', 'ds' },
   },
   {
     'chrisgrieser/nvim-spider',
     opts = {
-      skipInsignificantPunctuation = false
+      skipInsignificantPunctuation = false,
     },
     config = true,
     keys = {
@@ -46,28 +46,28 @@ return {
         function()
           require('spider').motion('w')
         end,
-        mode = { 'n', 'o', 'x' }
+        mode = { 'n', 'o', 'x' },
       },
       {
         'e',
         function()
           require('spider').motion('e')
         end,
-        mode = { 'n', 'o', 'x' }
+        mode = { 'n', 'o', 'x' },
       },
       {
         'b',
         function()
           require('spider').motion('b')
         end,
-        mode = { 'n', 'o', 'x' }
+        mode = { 'n', 'o', 'x' },
       },
       {
         'ge',
         function()
           require('spider').motion('ge')
         end,
-        mode = { 'n', 'o', 'x' }
+        mode = { 'n', 'o', 'x' },
       },
     },
   },
@@ -80,8 +80,8 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
-    event  = 'InsertEnter',
-    main   = 'plugins.settings.nvim-ts-autotag',
+    event = 'InsertEnter',
+    main = 'plugins.settings.nvim-ts-autotag',
     config = true,
   },
   {
@@ -101,10 +101,13 @@ return {
   },
   {
     'lambdalisue/suda.vim',
+    enabled = function()
+      return not (os.getenv('OS') == 'ANDROID')
+    end,
     cmd = {
       'SudaRead',
-      'SudaWrite'
-    }
+      'SudaWrite',
+    },
   },
   { 'tpope/vim-sleuth' },
   { 'MaxMEllon/vim-jsx-pretty' },

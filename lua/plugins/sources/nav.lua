@@ -9,7 +9,7 @@ return {
     keys = {
       {
         '<leader>-',
-        '<Cmd>Oil<Cr>'
+        '<Cmd>Oil<Cr>',
       },
     },
   },
@@ -25,7 +25,7 @@ return {
     keys = {
       {
         '<leader>nt',
-        '<Cmd>NvimTreeToggle<Cr>'
+        '<Cmd>NvimTreeToggle<Cr>',
       },
     },
   },
@@ -44,51 +44,57 @@ return {
         '<leader>tf',
         function()
           require('telescope.builtin').find_files()
-        end
+        end,
       },
       {
         '<leader>tF',
         function()
           require('telescope.builtin').find_files({
-            hidden = true
+            hidden = true,
           })
-        end
+        end,
       },
       {
         '<leader>tl',
         function()
           require('telescope.builtin').live_grep()
-        end
+        end,
       },
       {
         '<leader>tb',
         function()
           require('telescope.builtin').buffers()
-        end
+        end,
       },
       {
         '<leader>tgb',
         function()
           require('telescope.builtin').git_branches()
-        end
+        end,
       },
       {
         '<leader>tgc',
         function()
           require('telescope.builtin').git_bcommits()
-        end
+        end,
       },
       {
         '<leader>th',
         function()
           require('telescope.builtin').help_tags()
-        end
+        end,
       },
       {
         'z=',
         function()
           require('telescope.builtin').spell_suggest()
-        end
+        end,
+      },
+      {
+        '<leader>tn',
+        function()
+          require('telescope').extensions.notify.notify()
+        end,
       },
     },
   },
@@ -102,7 +108,7 @@ return {
         '<leader>tp',
         function()
           require('telescope').extensions.projects.projects({})
-        end
+        end,
       },
     },
   },
@@ -118,9 +124,9 @@ return {
         function()
           require('telescope').extensions.file_browser.file_browser({
             path = '%:p:h',
-            select_buffer = true
+            select_buffer = true,
           })
-        end
+        end,
       },
     },
   },
@@ -135,9 +141,10 @@ return {
     config = true,
     keys = {
       {
-        '<leader>h', function ()
+        '<leader>h',
+        function()
           require('hop').hint_char2({})
-        end
+        end,
       },
     },
   },

@@ -10,9 +10,12 @@ return {
   },
   {
     'akinsho/toggleterm.nvim',
-    event = 'VeryLazy',
     main = 'plugins.settings.toggleterm-nvim',
     config = true,
+    keys = {
+      '<C-\\>',
+      '<leader>gg',
+    },
   },
   {
     'jiaoshijie/undotree',

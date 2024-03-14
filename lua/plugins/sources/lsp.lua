@@ -3,10 +3,7 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    event = {
-      'BufReadPre',
-      'BufNewFile',
-    },
+    event = 'User FileOpen',
     dependencies = {
       'williamboman/mason.nvim',
       'antosha417/nvim-lsp-file-operations',
@@ -15,6 +12,7 @@ return {
       'SmiteshP/nvim-navbuddy',
       'stevearc/conform.nvim',
       'mfussenegger/nvim-lint',
+      'j-hui/fidget.nvim',
     },
     main = 'plugins.settings.nvim-lspconfig',
     config = true,
@@ -85,6 +83,7 @@ return {
   },
   {
     'j-hui/fidget.nvim',
+    lazy = true,
     tag = 'v1.0.0',
     config = true,
   },

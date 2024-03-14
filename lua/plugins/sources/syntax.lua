@@ -4,6 +4,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    event = 'User FileOpen',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-context',
@@ -19,10 +20,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    event = {
-      'BufReadPre',
-      'BufNewFile',
-    },
+    lazy = true,
     config = true,
     keys = {
       {

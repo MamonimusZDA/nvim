@@ -11,10 +11,7 @@ return {
   {
     'lukas-reineke/indent-blankline.nvim',
     commit = '9637670896b68805430e2f72cf5d16be5b97a22a',
-    event = {
-      'BufReadPre',
-      'BufNewFile',
-    },
+    event = 'User FileOpen',
     main = 'plugins.settings.indent-blankline-nvim',
     config = true,
   },
@@ -39,10 +36,7 @@ return {
   },
   {
     'NvChad/nvim-colorizer.lua',
-    event = {
-      'BufReadPost',
-      'BufNewFile',
-    },
+    event = 'User FileOpen',
     main = 'plugins.settings.nvim-colorizer-lua',
     config = true,
     keys = {
@@ -54,13 +48,13 @@ return {
   },
   {
     'rcarriga/nvim-notify',
-    dependencies = 'nvim-telescope/telescope.nvim',
     event = {
       'CursorMoved',
       'CursorHold',
       'InsertEnter',
       'CmdlineEnter',
     },
+    dependencies = 'nvim-telescope/telescope.nvim',
     main = 'plugins.settings.nvim-notify',
     config = true,
     keys = {
@@ -71,12 +65,6 @@ return {
             silent = true,
             pending = true,
           })
-        end,
-      },
-      {
-        '<leader>tn',
-        function()
-          require('telescope').extensions.notify.notify()
         end,
       },
     },

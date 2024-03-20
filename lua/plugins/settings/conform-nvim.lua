@@ -16,8 +16,8 @@ function M.setup()
     format_on_save = {
       lsp_fallback = true,
       async = false,
-      timeout_ms = 500,
-    }
+      timeout_ms = not os.getenv('OS') == 'ANDROID' and 500 or 5000,
+    },
   })
 end
 

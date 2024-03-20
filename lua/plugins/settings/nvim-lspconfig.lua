@@ -153,6 +153,15 @@ function M.setup()
     'pyright',
   }
 
+  local tools = {
+    -- formatter
+    'isort',
+    'stylua',
+    'black',
+    -- linter
+    'pylint',
+  }
+
   vim.diagnostic.config({
     signs = {
       active = true,
@@ -208,6 +217,11 @@ function M.setup()
     return
   end
 
+  if os.getenv('OS') == 'ANDROID' then
+    require('misc.tools').findel(servers, { 'lua_ls' })
+    require('misc.tools').findel(tools, { 'stylua' })
+  end
+
   mason_lspconfig.setup({
     ensure_installed = servers,
   })
@@ -218,14 +232,7 @@ function M.setup()
   end
 
   mason_tool_installer.setup({
-    ensure_installed = {
-      -- formatter
-      'isort',
-      'stylua',
-      'black',
-      -- linter
-      'pylint',
-    },
+    ensure_installed = tools,
     auto_update = true,
   })
 end

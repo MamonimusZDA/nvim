@@ -40,6 +40,7 @@ return {
         'n',
         function()
           require('improved-search').stable_next()
+          require('hlslens').start()
         end,
         mode = { 'n', 'x', 'o' },
       },
@@ -47,6 +48,7 @@ return {
         'N',
         function()
           require('improved-search').stable_previous()
+          require('hlslens').start()
         end,
         mode = { 'n', 'x', 'o' },
       },
@@ -84,6 +86,11 @@ return {
         end,
       },
     },
+  },
+  {
+    'kevinhwang91/nvim-hlslens',
+    lazy = true,
+    config = true,
   },
   {
     'otavioschwanck/new-file-template.nvim',
